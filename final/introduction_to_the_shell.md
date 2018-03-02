@@ -262,33 +262,6 @@ Over time, it will become easier for you to keep a mental note of the structure 
 
 ****
 
-## Saving time with shortcuts, wild cards, and tab completion
-
-### Shortcuts
-
-There are some shortcuts which you should know about. Dealing with the home directory is very common. So, in the shell the tilde character, `~`, is a shortcut for your home directory. Navigate to the `tutorial_shell` directory:
-
-Then enter the command:
-
-```
-ls ~
-```
-
-This prints the contents of your home directory, without you having to type the full path. The shortcut `..` always refers to the directory above your current directory. Thus:
-
-```
-ls ..
-```
-
-prints the contents of the directory one level higher than `tutorial_shell`. You can chain these together, so:
-
-```
-ls ../../
-```
-
-prints the contents of two levels higher than `tutorial_shell`. Finally, the special directory `.` always refers to your current directory. So, `ls`, `ls .`, and `ls ././././.` all do the same thing, they print the contents of the current directory. This may seem like a useless shortcut right now, but we'll see when it is needed in a little while.
-
-To summarize, while you are in the `shell` directory, the commands `ls ~`, `ls ~/.`, `ls ../../`, and `ls /home/username` all do exactly the same thing. These shortcuts are not necessary, they are provided for your convenience.
 
 ### Our data set: FASTQ files
 
@@ -314,14 +287,6 @@ The `*` character is a shortcut for "everything". Thus, if you enter `ls *`, you
 ls *fastq
 ```
 
-This lists every file that ends with a `fastq`. This command:
-
-```
-ls /usr/bin/*.sh
-```
-
-Lists every file in `/usr/bin` that ends in the characters `.sh`.
-
 We have paired end sequencing, so for every sample we have two files. If we want to just see the list of the files for the forward direction sequencing we can use:
 
 ```
@@ -330,27 +295,17 @@ ls *F*fastq
 
 lists every file in the current directory whose name contains the letter `F`, and ends with `fastq`. 
 
-So how does this actually work? Well...when the shell (bash) sees a word that contains the `\*` character, it automatically looks for filenames that match the given pattern. In this case, it identified four such files. Then, it replaced the `*F*fastq` with the list of files, separated by spaces. In other words, the two commands:
+Now try: 
 
 ```
-ls *F*fastq
-ls C01D01F_sub.fastq	C01D02F_sub.fastq	C01D03F_sub.fastq
+ls *C02*F
+ls *C02*F*
+ls *C02*F*fastq
+ls *C02*F*fastq *C03*F*fastq
 ```
 
-are exactly identical. The `ls` command cannot tell the difference between these two things.
+Understand the output of each. Notice: an asterisk is not needed after a file extension (fastq). 
 
-****
-**Short Exercise**
-
-Do each of the following using a single `ls` command without navigating to a different directory.
-
-1.  List all of the files in `/bin` that start with the letter 'c
-2.  List all of the files in `/bin` that contain the letter 'a'
-3.  List all of the files in `/bin` that end with the letter 'o'
-
-BONUS: List all of the files in '/bin' that contain the letter 'a' or 'c'
-
-****
 
 ### Tab Completion
 
@@ -365,20 +320,17 @@ The shell will fill in the rest of the directory name.
 Now go to `tutorial_shell/EDAMAME_16S/Fastq`
 
 ```
-ls C<tab><tab>
+ls C01D0<tab><tab>
 ```
 
 When you hit the first tab, the name is partially filled in. The reason is that there are multiple directories in the home directory which start with `C01D0`. Thus, the shell does not know which one to fill in. When you hit tab again, the shell will list the possible choices.
 
-Tab completion can also fill in the names of programs. For example, enter `e<tab><tab>`. You will see the name of every program that starts with an `e`. One of those is `echo`. If you enter `ec<tab>` you will see that tab completion works.
 
 ## Command History
 
 You can easily access previous commands.  Hit the up arrow. Hit it again.  You can step backwards through your command history. The down arrow takes your forwards in the command history.
 
 ^-C will cancel the command you are writing, and give you a fresh prompt.
-
-^-R will do a reverse-search through your command history.  This is very useful.
 
 You can also review your recent commands with the `history` command.  Just enter:
 
@@ -404,13 +356,6 @@ then you could repeat command #260 by simply entering:
 
 (that's an exclamation mark by the way).
 
-****
-**Short Exercise**
-
-1. Find the line number in your history for the last exercise (listing
-files in /bin) and reissue that command.
-
-****
 
 ## Examining Files
 
@@ -423,17 +368,6 @@ cat C01D01R_sub.fastq
 ```
 
 This prints out the contents of the `C01D01R_sub.fastq` file.
-
-****
-**Short Exercises**
-
-1.  Print out the contents of the `tutorial_shell/EDAMAME_16S/MappingFiles/Centralia_Full_Map.txt ` file. What does this file contain?
-
-2.  Without changing directories, (you should still be in `edamame-data`), use one short command to print the contents of all of the files in the `tutorial_shell/EDAMAME_16S/Fastq` directory.
-
-****
-
-Make sure we're in the right place for the next set of the lessons. We want to be in the `tutorial_shell/EDAMAME_16S/Fastq` directory. Check if you're there with `pwd` and if not navigate there.
 
 `cat` is a terrific program, but when the file is really big, it can be annoying to use. The program, `less`, is useful for this case. Enter the following command:
 
@@ -455,10 +389,6 @@ less C01D01R_sub.fastq
 |  "q"    | to quit |
 
 `less` also gives you a way of searching through files. Just hit the "/" key to begin a search. Enter the name of the word you would like to search for and hit enter. It will jump to the next location where that word is found. If you hit "/" then "enter", `less` will just repeat the previous search. `less` searches from the current location and works its way forward. If you are at the end of the file and search for the word that does not exist from that point forward, `less` will not find it. You need to go to the beginning of the file and search.
-
-For instance, let's search for the sequence `HWI-M03127:41:ACE13:1:1114:22908:11882` in our file. You can see that we go right to that sequence and can see what it looks like.
-
-Remember, the `man` program actually uses `less` internally and therefore uses the same commands, so you can search documentation using "/" as well!
 
 There's another way that we can look at files, and in this case, just look at part of them. This can be particularly useful if we just want to see the beginning or end of the file, or see how it's formatted.
 
@@ -494,22 +424,10 @@ grep -A 3 ACE13:1:2109:11596 C01D01R_sub.fastq
 
 The `-A` flag stands for "after match" so it's returning the line that matches plus the three after it. The `-B` flag returns that number of lines before the match.
 
-****
-** Exercise **
-
-Search for the sequence `CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA` in the `C01D01R_sub.fastq` file and in the output have the sequence name and the sequence. e.g.
-
-```
-@HWI-M03127:41:ACE13:1:1114:14857:17361 2:N:0:GGAGACAAGGGA
-CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCAGTATCTGCCCAGGTCGCCGCCTT
-```
-
-Search for that sequence in all the FASTQ files.
-****
 
 ## Redirection
 
-We're excited we have all these sequences that we care about that we just got from the FASTQ files. That is a really important motif that is going to help us answer our important question. But all those sequences just went whizzing by with grep. How can we capture them?
+We're excited we have all these sequences that we care about that we just got from the FASTQ files. There is a really important motif that is going to help us answer our important question. But all those sequences just went whizzing by with grep. How can we capture them?
 
 We can do that with something called "redirection". The idea is that we're redirecting the output to the terminal (all the stuff that went whizzing by) to something else. In this case, we want to print it to a file, so that we can look at it later.
 
@@ -518,34 +436,13 @@ The redirection command for putting something in a file is `>`
 Let's try it out and put all the sequences that contain 'CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA' from all the files in to another file called 'good-data.txt'
 
 ```
-grep -B 2 CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * > good-data.txt
+grep -B 1 -A 2 CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * > good-data.txt
 ```
 
 The above code makes use of the `*` wilcard to search *ALL* of the files in your current directory for the sequence. The `>` here says to write the results from the `grep` command we just ran to a new file called good-data.txt The prompt should sit there a little bit, and then it should look like nothing happened. But type `ls`. You should have a new file called good-data.txt. Take a look at it and see if it has what you think it should.
 
-There's one more useful redirection command that we're going to show, and that's called the pipe command, and it is `|`. It's probably not a key on your keyboard you use very much. What `|` does is take the output that scrolling by on the terminal and then can run it through another command. When it was all whizzing by before, we wished we could just slow it down and look at it, like we can with `less`. Well it turns out that we can! We pipe the `grep` command through `less`.
+This file grabbed all sequence matches along with 1 line before and 2 lines after the sequence. 
 
-```
-grep CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * | less
-```
-
-Now we can use the arrows to scroll up and down and use `q` to get out.
-
-We can also do something tricky and use the command `wc`. `wc` stands for `word count`. It counts the number of lines or characters. So, we can use it to count the number of lines we're getting back from our `grep` command. And that will magically tell us how many sequences we're finding. We're
-
-```
-grep CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * | wc
-```
-
-That tells us the number of lines, words and characters in the file. If we just want the number of lines, we can use the `-l` flag for `lines`.
-
-```
-grep CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * | wc -l
-```
-
-Redirecting is not super intuitive, but it's really powerful for stringing together these different commands, so you can do whatever you need to do.
-
-The philosophy behind these command line programs is that none of them really do anything all that impressive. BUT when you start chaining them together, you can do some really powerful things really efficiently. If you want to be proficient at using the shell, you must learn to become proficient with the pipe and redirection operators: `|`, `>`, `>>`.
 
 ## Creating, moving, copying, and removing
 
@@ -592,24 +489,6 @@ rm backup/Centralia_Full_Map_backup.txt
 The `rm` file removes the file. Be careful with this command. It doesn't just nicely put the files in the Trash. They're really gone.
 
 
-****
-**Short Exercise**
-
-Do the following:
-
-1.  Rename the `Centralia_Full_Map_IMPORTANT.txt` file to `Centralia_Full_Map.txt`.
-2.  Create a directory in the `Fastq` directory called `new`
-3.  Then, copy the `Centralia_Full_Map.txt` file into `new`
-
-****
-
-By default, `rm`, will NOT delete directories. You can tell `rm` to
-delete a directory using the `-r` option. Let's delete that `new` directory
-we just made. Enter the following command:
-
-```
-rm -r new
-```
 
 ## Writing files
 
@@ -617,68 +496,34 @@ We've been able to do a lot of work with files that already exist, but what if w
 
 To write in files, we're going to use the program `nano`. We're going to create a file that contains the favorite grep command so you can remember it for later. We'll name this file 'awesome.sh'.
 
+#Mac users
 ```
 nano awesome.sh
+```
+#Windows users
+```
+vim awesome.sh
+#Then hit "i" to beging inserting text. 
 ```
 
 Type in your command, so it looks like
 
 ```
-grep -B 1 CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * > good_data.txt
+grep -B 1 -A 2 CCTGTTTGCTCCCCACGCTCTCGCACCTCAGTGTCA * > good_data.txt
 ```
 
-Now we want to save the file and exit. At the bottom of nano, you see the "^X Exit". That means that we use Ctrl-X to exit. Type `Ctrl-X`. It will ask if you want to save it. Type `y` for yes. Then it asks if you want that file name. Hit 'Enter'.
+Now we want to save the file and exit.
+
+#Mac users 
+At the bottom of nano, you see the "^X Exit". That means that we use Ctrl-X to exit. Type `Ctrl-X`. It will ask if you want to save it. Type `y` for yes. Then it asks if you want that file name. Hit 'Enter'.
+
+#Windows users
+Press "esc", then type ":x" to exit and save. 
 
 Now you've written a file. You can take a look at it with less or cat, or open it up again and edit it.
 
-***
-**Exercise**
 
-Open `awesome.sh` and add `echo AWESOME\!` after the grep command and save the file.
-
-We're going to come back and use this file in just a bit.
-
-***
-
-## Running programs
-
-Commands like `ls`, `rm`, `echo`, and `cd` are just ordinary programs on the computer. A program is just a file that you can *execute*. The program `which` tells you the location of a particular program. For example:
-
-```
-which ls
-```
-
-Will return "/bin/ls". Thus, we can see that `ls` is a program that sits inside of the `/bin` directory. Now enter:
-
-```
-which find
-```
-
-You will see that `find` is a program that sits inside of the `/usr/bin` directory.
-
-So ... when we enter a program name, like `ls`, and hit enter, how does the shell know where to look for that program? How does it know to run `/bin/ls` when we enter `ls`. The answer is that when we enter a program name and hit enter, there are a few standard places that the shell automatically looks. If it can't find the program in any of those places, it will print an error saying "command not found". Enter the command:
-
-```
-echo $PATH
-```
-
-This will print out the value of the `PATH` environment variable. More on environment variables later. Notice that a list of directories, separated by colon characters, is listed. These are the places the shell looks for programs to run. If your program is not in this list, then an error is printed. The shell ONLY checks in the places listed in the `PATH` environment variable.
-
-Navigate to the `shell` directory and list the contents. You will notice that there is a program (executable file) called `hello.sh` in this directory. Now, try to run the program by entering:
-
-```
-hello.sh
-```
-
-You should get an error saying that hello.sh cannot be found. That is because the directory `tutorial_shell` is not in the `PATH`. You can run the `hello.sh` program by entering:
-
-```
-./hello.sh
-```
-
-Remember that `.` is a shortcut for the current working directory. This tells the shell to run the `hello.sh` program which is located right here. So, you can run any program by entering the path to that program. You can run `hello.sh` equally well by specifying its *full path*.
-
-## Writing scripts
+## Running scripts
 
 We know how to write files and run scripts, so I bet you can guess where this is headed. We're going to run our own script!
 
@@ -702,48 +547,9 @@ Now let's try running it again:
 ./awesome.sh
 ```
 
-Now you should have seen some output, and of course, it's AWESOME! Congratulations, you just created your first shell script! You're set to rule the world.
+Now you should have seen some output. You just created your first shell script! You're set to rule the world.
 
 # For Future Reference
-
-# Finding files
-
-The `find` program can be used to find files based on arbitrary criteria. Navigate to the `data` directory and enter the following command:
-
-```
-find . -print
-```
-
-This prints the name of every file or directory, recursively, starting from the current directory. Let's exclude all of the directories:
-
-```
-find . -type f -print
-```
-
-This tells `find` to locate only files. Now try these commands:
-
-```
-find . -type f -name "*1*"
-find . -type f -name "*1*" -or -name "*2*" -print
-find . -type f -name "*1*" -and -name "*2*" -print
-```
-
-The `find` command can acquire a list of files and perform some operation on each file. Try this command out:
-
-```
-find . -type f -exec grep Volume {} \;
-```
-
-This command finds every file starting from `.`. Then it searches each file for a line which contains the word "Volume". The `{}` refers to the name of each file. The trailing `\;` is used to terminate the command.  This command is slow, because it is calling a new instance of `grep` for each item the `find` returns.
-
-A faster way to do this is to use the `xargs` command:
-
-```
-find . -type f -print | xargs grep Volume
-```
-
-`find` generates a list of all the files we are interested in, then we pipe them to `xargs`.  `xargs` takes the items given to it and passes them as arguments to `grep`.  `xargs` generally only creates a single instance of `grep` (or whatever program it is running).
-
 
 *** Help and other resources
 ## Where can I learn more about the shell?
