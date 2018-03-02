@@ -259,9 +259,6 @@ You can usually use either a full path or a relative path depending on what is m
 Over time, it will become easier for you to keep a mental note of the structure of the directories that you are using and how to quickly navigate amongst them.
 
 ****
-**Short Exercise**
-
-Now, list the contents of the /bin directory. Do you see anything familiar in there?
 
 ****
 
