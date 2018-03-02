@@ -550,7 +550,7 @@ Now you've written a file. You can take a look at it with less or cat, or open i
 
 We know how to write files and run scripts, so I bet you can guess where this is headed. We're going to run our own script!
 
-Go in to the 'MiSeq' directory where we created 'awesome.sh' before. Remember we wrote our favorite grep command in there. Since we like it so much, we might want to run it again, or even all the time. Instead of writing it out every time, we can just run it as a script.
+Go in to the 'Fastq' directory where we created 'awesome.sh' before. Remember we wrote our favorite grep command in there. Since we like it so much, we might want to run it again, or even all the time. Instead of writing it out every time, we can just run it as a script.
 
 It's a command, so we should just be able to run it. Give it try.
 
