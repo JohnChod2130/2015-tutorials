@@ -123,6 +123,15 @@ Now let's go do that same navigation at the command line.
 
 Open The Shell
 
+If you're a windows user, type enter this is command line: 
+
+```
+cd C:\\
+```
+
+This brings you into the C drive where your downloads folder is.
+
+
 Congrats! You are in the home directory. Just to be sure, let's type:
 
 ```
