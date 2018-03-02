@@ -486,6 +486,20 @@ Now the file name has been changed to `Centralia_Full_Map_IMPORTANT.txt`. Let's 
 rm backup/Centralia_Full_Map_backup.txt
 ```
 
+Let's get rid of the backup directory. Make sure you are are not in the backup directory. You should be one directory above the backup directory.
+
+```
+rm backup
+```
+
+This won't worK: rm: backup/: is a directory
+
+Why? "backup" is a directory and so we need provide permission for shell to remove all contents of the directory. We can do this with a recursive command.
+
+```
+rm -r backup
+```
+
 The `rm` file removes the file. Be careful with this command. It doesn't just nicely put the files in the Trash. They're really gone.
 
 
@@ -503,7 +517,7 @@ nano awesome.sh
 #Windows users
 ```
 vim awesome.sh
-#Then hit "i" to beging inserting text. 
+#Then hit "i" to begin inserting text. 
 ```
 
 Type in your command, so it looks like
