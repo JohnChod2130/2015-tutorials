@@ -4,7 +4,7 @@ title: "The Shell"
 comments: true
 date: 2015-06-22 16:44:36
 ---
-# Introduction to the shell
+# Introduction to the
 ***
 Authored by Tracy Teal with [Software Carpentry](http://software-carpentry.org/lessons.html), with minor modifications by Ashley Shade, Joshua Herr, and Paul Wilburn 
 [EDAMAME-2015 wiki](https://github.com/edamame-course/2015-tutorials/wiki)
