@@ -519,6 +519,8 @@ We've been able to do a lot of work with files that already exist, but what if w
 
 To write in files, we're going to use the program `nano`. We're going to create a file that contains the favorite grep command so you can remember it for later. We'll name this file 'awesome.sh'.
 
+But first, cd back into the Fastq directory.
+
 #Mac users
 ```
 nano awesome.sh
@@ -548,7 +550,7 @@ Now you've written a file. You can take a look at it with less or cat, or open i
 
 ## Running scripts
 
-We know how to write files and run scripts, so I bet you can guess where this is headed. We're going to run our own script!
+We know how to write files and run scripts, so I bet you can guess where this is headed. We're going to run our own script! 
 
 Go in to the 'Fastq' directory where we created 'awesome.sh' before. Remember we wrote our favorite grep command in there. Since we like it so much, we might want to run it again, or even all the time. Instead of writing it out every time, we can just run it as a script.
 
