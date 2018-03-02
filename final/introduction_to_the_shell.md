@@ -415,7 +415,7 @@ head -n 1 C01D01R_sub.fastq
 tail -n 1 C01D01R_sub.fastq
 ```
 
-## Searching files
+## Searching and extracting within files
 
 We showed a little how to search within a file using `less`. We can also search within files without even opening them, using `grep`. Grep is a command-line utility for searching plain-text data sets for lines matching a string or regular expression. Let's give it a try!
 
